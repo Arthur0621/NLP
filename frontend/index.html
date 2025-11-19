@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News NLP Portal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Vietnamese News NLP Portal</h1>
+    <p>Nhập nội dung tin tức, phân loại bằng PhoBERT và xem danh sách tin mới nhất.</p>
+    <nav class="navbar">
+      <div class="nav-links">
+        <a href="#topic-card">Khám phá</a>
+        <a href="#news-card">Danh sách tin</a>
+        <a href="#stats-card">Thống kê</a>
+        <a href="#create-card">Thêm bài viết</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="cards-row">
+      <section class="card" id="topic-card">
+        <h2>Khám phá theo chủ đề</h2>
+        <div class="topic-controls">
+          <label>
+            Chọn chủ đề
+            <select id="topic-select">
+              <option value="" disabled selected>Đang tải danh sách chủ đề...</option>
+            </select>
+          </label>
+          <button id="btn-topic-refresh">Tải bài mới</button>
+        </div>
+        <div id="topic-articles" class="topic-articles">
+          <p class="muted">Chọn một chủ đề để xem các bài viết nổi bật và tóm tắt ngắn gọn.</p>
+        </div>
+      </section>
+
+      <section class="card" id="classify-card">
+        <h2>Phân loại nhanh</h2>
+        <label for="classify-text">Nội dung bài viết</label>
+        <textarea id="classify-text" rows="6" placeholder="Nhập nội dung hoặc đoạn tin..."></textarea>
+        <button id="btn-classify">Phân loại</button>
+        <div id="classify-result" class="result"></div>
+      </section>
+      <section class="card" id="news-card">
+        <h2>Danh sách tin đã lưu</h2>
+        <div class="filters">
+          <input type="text" id="filter-topic" placeholder="Lọc theo chủ đề" />
+          <input type="text" id="filter-source" placeholder="Lọc theo nguồn" />
+          <input type="text" id="filter-query" placeholder="Tìm kiếm theo từ khóa" />
+        </div>
+        <div class="filters">
+          <button id="btn-refresh">Tải lại</button>
+          <button id="btn-classify-query" class="secondary">Phân loại truy vấn</button>
+        </div>
+        <div id="query-result" class="result"></div>
+        <div id="news-list" class="news-list"></div>
+        <div class="pagination" id="news-pagination">
+          <button id="news-prev">← Trước</button>
+          <span id="news-page-info">Trang 1/1</span>
+          <button id="news-next">Sau →</button>
+        </div>
+      </section>
+
+      <section class="card" id="stats-card">
+        <h2>Thống kê Hot Topics</h2>
+        <div class="filters">
+          <label>Khoảng thời gian (giờ)
+            <input type="number" id="stats-hours" value="24" min="1" max="168" />
+          </label>
+          <label>Số lượng hiển thị
+            <input type="number" id="stats-limit" value="5" min="1" max="20" />
+          </label>
+          <button id="btn-stats">Lấy thống kê</button>
+        </div>
+        <div class="stats-grid">
+          <div>
+            <h3>Chủ đề nổi bật</h3>
+            <canvas id="stats-topics-chart" class="stats-chart"></canvas>
+            <ul id="stats-topics" class="stats-list"></ul>
+          </div>
+          <div>
+            <h3>Nguồn nổi bật</h3>
+            <canvas id="stats-sources-chart" class="stats-chart"></canvas>
+            <ul id="stats-sources" class="stats-list"></ul>
+          </div>
+          <div>
+            <h3>Nguồn &amp; chủ đề chính</h3>
+            <ul id="stats-source-topics"></ul>
+          </div>
+          <div>
+            <h3>Chủ đề nhiều nhất từng ngày</h3>
+            <ul id="stats-daily-topics"></ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="card" id="create-card">
+      <h2>Thêm bài viết vào hệ thống</h2>
+      <div class="form-grid">
+        <label>Tiêu đề
+          <input type="text" id="article-title" placeholder="Nhập tiêu đề" />
+        </label>
+        <label>Nguồn báo
+          <input type="text" id="article-source" placeholder="ví dụ: vnexpress" />
+        </label>
+        <label>URL
+          <input type="url" id="article-url" placeholder="https://..." />
+        </label>
+      </div>
+      <label>Nội dung
+        <textarea id="article-content" rows="6" placeholder="Toàn bộ nội dung bài viết"></textarea>
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" id="article-classify" checked />
+        Tự động phân loại khi lưu
+      </label>
+      <button id="btn-create">Lưu bài viết</button>
+      <div id="create-result" class="result"></div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Powered by PhoBERT & FastAPI · Demo frontend tĩnh</small>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

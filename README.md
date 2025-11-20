@@ -182,6 +182,27 @@ Scheduler sẽ định kỳ gọi crawler, tóm tắt, phân loại và lưu bà
 
 ## 5. Huấn luyện lại PhoBERT
 
+### 5.0. Tải nhanh mô hình & dataset đã xử lý (không cần tự train)
+
+- **Mô hình đã huấn luyện (PhoBERT fine-tune 10 chủ đề)**  
+  Link Google Drive: https://drive.google.com/file/d/1gXUtW1513dwKv-aoPV0fiNGHGxi3ueuW/view?usp=drive_link  
+  Sau khi tải về:
+  - Giải nén (nếu là file `.zip`) để được thư mục `best_model`.
+  - Đặt thư mục này vào `models/best_model/` trong project, sao cho cấu trúc:
+    - `models/best_model/config.json`, `model.safetensors`, `vocab.txt`, `tokenizer_config.json`, `label_mapping.json`, ...
+  - Hoặc cấu hình biến môi trường `MODEL_PATH` trỏ tới thư mục model nếu bạn đặt ở nơi khác.
+
+- **Dataset sau xử lý (CSV đã tiền xử lý)**  
+  Link Google Drive: https://drive.google.com/file/d/1W1CkQItbIZ4ko4QtWyr_m2VMglHhWuAf/view?usp=drive_link  
+  Sau khi tải về, giải nén (nếu cần) và đặt các file CSV vào thư mục `Dataset/`, ví dụ:
+  - `Dataset/processed_news_advanced.csv`  
+  - `Dataset/training_topics_10.csv`
+
+- **Báo cáo huấn luyện**  
+  Thư mục `reports/` trong repo chứa:
+  - `reports/classification_report.json`  
+  - `reports/confusion_matrix.png`
+
 ### 5.1. Chuẩn hoá dữ liệu theo 10 chủ đề
 
 - `config/topics.py`: định nghĩa 10 chủ đề mục tiêu và mapping từ label gốc.

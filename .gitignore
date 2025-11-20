@@ -11,15 +11,14 @@ env/
 .vscode/
 .idea/
 
-# Logs
-*.log
-
 # Dataset lớn (không đưa lên GitHub)
 Dataset/
 
-# Model & reports nặng (không đưa lên GitHub)
+# Model nặng (không đưa lên GitHub)
 models/
-reports/
 *.safetensors
 *.pt
 *.bin
+
+# Logs
+*.log
